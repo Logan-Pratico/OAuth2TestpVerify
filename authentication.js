@@ -1,12 +1,14 @@
 const getAccessToken = (z, bundle) => {
-  const promise = z.request(`${process.env.BASE_URL}/Test/Token`, {
+  const promise = z.request(`https://api.pverify.com/Test/Token`, {
     method: 'POST',
     body: {
       //extra data pulled from the users query string
     //  accountDomain: bundle.cleanedRequest.querystring.accountDomain,
      // code: bundle.inputData.code,
-      username: process.env.CLIENT_ID,
-      password: process.env.CLIENT_SECRET,
+      username:'pverify_demo', 
+	//process.env.CLIENT_ID,
+      password: 'pverify@949',
+	// process.env.CLIENT_SECRET,
       grant_type: 'password'
     },
     headers: {
@@ -81,9 +83,9 @@ module.exports = {
     // Zapier generates the state and redirect_uri, you are responsible for providing the rest.
     // Note: can also be a function that returns a string
     authorizeUrl: {
-      url: `${process.env.BASE_URL}/Test/Token`,
+      url: `${process.env.BASE_URL}/oauth/authorize`,
       params: {
-        username: '{{process.env.CLIENT_ID}}',
+        client_id: '{{process.env.CLIENT_ID}}',
         state: '{{bundle.inputData.state}}',
         redirect_uri: '{{bundle.inputData.redirect_uri}}',
         response_type: 'code'
